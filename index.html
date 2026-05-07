@@ -7,16 +7,20 @@
 
 <style>
 :root{
-  --bg:#050509;
-  --card:#11111c;
-  --card2:#18182a;
-  --text:#f7f7ff;
-  --muted:#b9b9d6;
+  --bg:#05050a;
+  --panel:#10101b;
+  --panel2:#17172a;
+  --text:#ffffff;
+  --muted:#b9bad6;
+  --soft:#e9e9ff;
   --pink:#ff2fb3;
   --blue:#27e8ff;
   --yellow:#fff36d;
   --green:#6dffb8;
-  --danger:#ff5c7a;
+  --orange:#ff9d35;
+  --red:#ff5577;
+  --line:rgba(255,255,255,.12);
+  --shadow:0 28px 90px rgba(0,0,0,.45);
 }
 
 *{
@@ -25,13 +29,18 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   min-height:100vh;
   font-family:Inter, Arial, sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(255,47,179,.22), transparent 35%),
-    radial-gradient(circle at top right, rgba(39,232,255,.18), transparent 30%),
-    linear-gradient(180deg,#050509,#090914 45%,#020207);
+    radial-gradient(circle at 10% 0%, rgba(255,47,179,.25), transparent 32%),
+    radial-gradient(circle at 95% 8%, rgba(39,232,255,.20), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(255,243,109,.11), transparent 35%),
+    linear-gradient(180deg,#05050a,#090914 52%,#020207);
   color:var(--text);
   overflow-x:hidden;
 }
@@ -44,101 +53,102 @@ body::before{
   background-image:
     linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-  background-size:42px 42px;
-  mask-image:linear-gradient(to bottom, black, transparent 90%);
+  background-size:44px 44px;
+  mask-image:linear-gradient(to bottom, black, transparent 86%);
+  z-index:-1;
 }
 
 .wrapper{
-  width:min(1120px,94%);
+  width:min(1220px,94%);
   margin:auto;
-  padding:32px 0;
+  padding:28px 0 36px;
 }
 
 .hero{
   text-align:center;
-  padding:34px 12px 24px;
+  padding:34px 10px 20px;
 }
 
 .badge{
   display:inline-flex;
-  gap:8px;
   align-items:center;
-  padding:8px 14px;
-  border:1px solid rgba(255,255,255,.16);
+  gap:9px;
+  padding:9px 15px;
+  border:1px solid var(--line);
   border-radius:999px;
-  color:var(--yellow);
   background:rgba(255,255,255,.06);
-  box-shadow:0 0 28px rgba(255,47,179,.18);
+  color:var(--yellow);
   font-size:.9rem;
+  box-shadow:0 0 35px rgba(255,47,179,.18);
   margin-bottom:18px;
 }
 
 h1{
-  font-size:clamp(2.3rem,7vw,5.8rem);
-  line-height:.92;
-  letter-spacing:-.07em;
+  font-size:clamp(2.4rem,7vw,6.4rem);
+  line-height:.88;
+  letter-spacing:-.075em;
   text-transform:uppercase;
   background:linear-gradient(90deg,#fff,var(--blue),var(--pink),var(--yellow));
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  text-shadow:0 0 30px rgba(255,47,179,.18);
 }
 
 .subtitle{
-  max-width:760px;
+  max-width:820px;
   margin:18px auto 0;
   color:var(--muted);
-  font-size:clamp(1rem,2.3vw,1.18rem);
+  font-size:clamp(1rem,2.2vw,1.18rem);
   line-height:1.55;
 }
 
 .app{
   display:grid;
-  grid-template-columns:420px 1fr;
+  grid-template-columns:400px 1fr;
   gap:22px;
   align-items:start;
   margin-top:26px;
 }
 
 .panel{
-  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
-  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.035));
+  border:1px solid var(--line);
   border-radius:30px;
-  box-shadow:0 24px 90px rgba(0,0,0,.42);
+  box-shadow:var(--shadow);
   backdrop-filter:blur(14px);
 }
 
 .controls{
-  padding:22px;
+  padding:21px;
   position:sticky;
-  top:18px;
+  top:16px;
 }
 
 label{
   display:block;
-  font-size:.84rem;
-  color:#eeeeff;
-  margin:15px 0 8px;
-  letter-spacing:.04em;
+  color:#f1f1ff;
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.08em;
   text-transform:uppercase;
+  margin:16px 0 8px;
 }
 
 textarea,
 select,
 input{
   width:100%;
-  border:1px solid rgba(255,255,255,.13);
+  border:1px solid rgba(255,255,255,.14);
   background:rgba(0,0,0,.35);
   color:white;
-  border-radius:18px;
-  padding:14px 15px;
+  border-radius:17px;
+  padding:13px 14px;
   font-size:1rem;
   outline:none;
 }
 
 textarea{
-  min-height:118px;
+  min-height:110px;
   resize:vertical;
   line-height:1.45;
 }
@@ -150,27 +160,98 @@ input:focus{
   box-shadow:0 0 0 4px rgba(39,232,255,.12);
 }
 
+select option{
+  background:#111;
+  color:white;
+}
+
 .row{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:11px;
+}
+
+.slider-row{
+  margin-top:12px;
+  padding:13px;
+  background:rgba(0,0,0,.22);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+}
+
+.slider-top{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:.84rem;
+  margin-bottom:8px;
+}
+
+input[type="range"]{
+  padding:0;
+  height:8px;
+  accent-color:var(--pink);
+}
+
+.word-bank{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  min-height:46px;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.11);
+  background:rgba(0,0,0,.22);
+  border-radius:18px;
+}
+
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 10px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:999px;
+  color:#fff;
+  font-size:.88rem;
+}
+
+.chip span{
+  outline:none;
+  min-width:24px;
+}
+
+.chip button{
+  width:20px;
+  height:20px;
+  padding:0;
+  border-radius:50%;
+  font-size:.8rem;
+  background:rgba(255,255,255,.15);
+  color:#fff;
+}
+
+.add-word{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  margin-top:8px;
 }
 
 .buttons{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:20px;
+  gap:10px;
+  margin-top:18px;
 }
 
 button{
   border:0;
   cursor:pointer;
-  border-radius:18px;
-  padding:14px 16px;
-  color:#050509;
-  font-weight:900;
-  font-size:.96rem;
+  border-radius:17px;
+  padding:13px 14px;
+  font-weight:950;
+  font-size:.93rem;
   transition:.18s ease;
 }
 
@@ -179,97 +260,227 @@ button:hover{
   filter:brightness(1.08);
 }
 
+button:active{
+  transform:translateY(0);
+}
+
 .primary{
   grid-column:span 2;
-  background:linear-gradient(90deg,var(--yellow),var(--pink),var(--blue));
   color:#050509;
-  box-shadow:0 0 30px rgba(255,47,179,.25);
+  background:linear-gradient(90deg,var(--yellow),var(--pink),var(--blue));
+  box-shadow:0 0 28px rgba(255,47,179,.28);
 }
 
 .secondary{
   background:#fff;
+  color:#050509;
 }
 
 .darkbtn{
   background:#222238;
-  color:white;
+  color:#fff;
   border:1px solid rgba(255,255,255,.12);
 }
 
+.hotbtn{
+  background:linear-gradient(90deg,var(--pink),var(--orange));
+  color:#fff;
+}
+
 .small-note{
+  margin-top:14px;
   color:var(--muted);
   font-size:.82rem;
   line-height:1.45;
-  margin-top:16px;
 }
 
 .output{
-  padding:22px;
-  min-height:650px;
+  padding:21px;
+  min-height:720px;
 }
 
-.output-top{
+.topbar{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:14px;
-  margin-bottom:18px;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:16px;
 }
 
 .song-title{
-  font-size:clamp(1.6rem,4vw,3rem);
-  letter-spacing:-.04em;
-  line-height:1;
+  font-size:clamp(1.75rem,4vw,3.4rem);
+  letter-spacing:-.055em;
+  line-height:.95;
+  outline:none;
+}
+
+.song-title:focus{
+  text-shadow:0 0 18px rgba(39,232,255,.55);
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:8px;
 }
 
 .pill{
   white-space:nowrap;
-  font-size:.8rem;
+  font-size:.79rem;
   color:var(--green);
   border:1px solid rgba(109,255,184,.24);
   background:rgba(109,255,184,.08);
-  padding:8px 12px;
+  padding:8px 11px;
   border-radius:999px;
 }
 
-.lyrics-box{
+.pill.pink{
+  color:#ffd6f1;
+  border-color:rgba(255,47,179,.28);
+  background:rgba(255,47,179,.1);
+}
+
+.pill.blue{
+  color:#d4fbff;
+  border-color:rgba(39,232,255,.28);
+  background:rgba(39,232,255,.09);
+}
+
+.quick-tools{
+  display:grid;
+  grid-template-columns:1.1fr 1fr auto;
+  gap:10px;
+  margin-bottom:16px;
+  padding:13px;
+  border-radius:21px;
+  background:rgba(0,0,0,.22);
+  border:1px solid rgba(255,255,255,.09);
+}
+
+.mini-button{
+  padding:12px 13px;
+}
+
+.viral-strip{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-bottom:16px;
+}
+
+.mini-card{
+  background:rgba(0,0,0,.28);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:23px;
+  padding:15px;
+}
+
+.mini-card h3{
+  font-size:.82rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--yellow);
+  margin-bottom:9px;
+}
+
+.editable-box{
+  min-height:82px;
+  outline:none;
+  color:#f7f7ff;
+  line-height:1.55;
+  white-space:pre-wrap;
+}
+
+.editable-box:focus{
+  box-shadow:inset 0 0 0 2px rgba(39,232,255,.25);
+  border-radius:14px;
+  padding:6px;
+  margin:-6px;
+}
+
+.sections{
+  display:grid;
+  gap:14px;
+}
+
+.section-card{
+  position:relative;
   background:
     linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025)),
-    rgba(0,0,0,.28);
+    rgba(0,0,0,.25);
   border:1px solid rgba(255,255,255,.11);
-  border-radius:26px;
-  padding:24px;
-  min-height:500px;
+  border-radius:25px;
+  overflow:hidden;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 15px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.04);
+}
+
+.section-head strong{
+  color:#fff;
+  letter-spacing:.06em;
+  font-size:.82rem;
+}
+
+.section-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.section-actions button{
+  padding:8px 10px;
+  font-size:.76rem;
+  border-radius:999px;
+}
+
+.section-text{
+  padding:18px;
+  min-height:130px;
+  outline:none;
   white-space:pre-wrap;
   line-height:1.72;
-  color:#fbfbff;
   font-size:1.02rem;
+  color:#fbfbff;
+}
+
+.section-text:focus{
+  background:rgba(39,232,255,.04);
+  box-shadow:inset 0 0 0 2px rgba(39,232,255,.18);
 }
 
 .placeholder{
-  color:#8787a8;
+  color:#898aac;
 }
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-top:14px;
+  grid-template-columns:repeat(4,1fr);
+  gap:11px;
+  margin-top:15px;
 }
 
 .stat{
-  border:1px solid rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.10);
   background:rgba(255,255,255,.045);
   border-radius:18px;
   padding:12px;
   color:var(--muted);
-  font-size:.82rem;
+  font-size:.8rem;
 }
 
 .stat strong{
   display:block;
   color:white;
-  font-size:1.05rem;
+  font-size:1.06rem;
   margin-bottom:4px;
 }
 
@@ -277,13 +488,13 @@ button:hover{
   position:fixed;
   left:50%;
   bottom:24px;
-  transform:translateX(-50%) translateY(30px);
+  transform:translateX(-50%) translateY(28px);
   opacity:0;
   background:#fff;
   color:#050509;
   padding:13px 18px;
   border-radius:999px;
-  font-weight:900;
+  font-weight:950;
   box-shadow:0 18px 45px rgba(0,0,0,.35);
   transition:.25s ease;
   z-index:50;
@@ -296,8 +507,8 @@ button:hover{
 
 footer{
   text-align:center;
-  margin:28px 0 4px;
   color:var(--muted);
+  margin:28px 0 4px;
 }
 
 footer a{
@@ -306,21 +517,22 @@ footer a{
   border-bottom:1px solid rgba(255,255,255,.35);
 }
 
-.floating-word{
+.float-word{
   position:fixed;
   pointer-events:none;
-  font-weight:900;
+  z-index:-1;
+  opacity:.075;
+  font-weight:950;
   text-transform:uppercase;
-  opacity:.08;
-  animation:float 12s linear infinite;
+  animation:floatUp 14s linear infinite;
 }
 
-@keyframes float{
-  from{ transform:translateY(110vh) rotate(-8deg); }
-  to{ transform:translateY(-20vh) rotate(8deg); }
+@keyframes floatUp{
+  from{ transform:translateY(112vh) rotate(-10deg); }
+  to{ transform:translateY(-25vh) rotate(10deg); }
 }
 
-@media(max-width:900px){
+@media(max-width:980px){
   .app{
     grid-template-columns:1fr;
   }
@@ -330,20 +542,15 @@ footer a{
     top:auto;
   }
 
-  .stats{
+  .viral-strip{
     grid-template-columns:1fr;
-  }
-
-  .output-top{
-    align-items:flex-start;
-    flex-direction:column;
   }
 }
 
-@media(max-width:520px){
+@media(max-width:650px){
   .wrapper{
     width:min(96%,100%);
-    padding:18px 0;
+    padding:18px 0 28px;
   }
 
   .hero{
@@ -355,7 +562,9 @@ footer a{
   }
 
   .row,
-  .buttons{
+  .buttons,
+  .quick-tools,
+  .stats{
     grid-template-columns:1fr;
   }
 
@@ -363,8 +572,20 @@ footer a{
     grid-column:span 1;
   }
 
-  .lyrics-box{
-    padding:18px;
+  .topbar{
+    flex-direction:column;
+  }
+
+  .meta{
+    justify-content:flex-start;
+  }
+
+  .section-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .section-text{
     font-size:.98rem;
   }
 }
@@ -373,25 +594,26 @@ footer a{
 
 <body>
 
-<div class="floating-word" style="left:4%; animation-delay:0s; font-size:4rem;">HOOK</div>
-<div class="floating-word" style="left:72%; animation-delay:3s; font-size:3rem;">VIRAL</div>
-<div class="floating-word" style="left:35%; animation-delay:6s; font-size:5rem;">LYRICS</div>
+<div class="float-word" style="left:4%; animation-delay:0s; font-size:4rem;">HOOK</div>
+<div class="float-word" style="left:74%; animation-delay:2s; font-size:3.5rem;">VIRAL</div>
+<div class="float-word" style="left:34%; animation-delay:5s; font-size:5rem;">LYRICS</div>
+<div class="float-word" style="left:12%; animation-delay:8s; font-size:3rem;">CHORUS</div>
 
 <main class="wrapper">
 
   <section class="hero">
-    <div class="badge">⚡ Unique Song Idea Generator</div>
+    <div class="badge">⚡ Editable Song Generator</div>
     <h1>Viral Lyrics Generator</h1>
     <p class="subtitle">
-      Type one word, a feeling, a story, or what the song is about. The site creates a fresh song structure with a hook, verses, chorus, bridge and outro — ready to copy.
+      Type a word, feeling, story or song idea. Generate a fresh song, edit any lyric, replace words, regenerate sections, copy hooks, download drafts and build a stronger chorus.
     </p>
   </section>
 
   <section class="app">
 
     <aside class="panel controls">
-      <label for="idea">What is the song about?</label>
-      <textarea id="idea" placeholder="Example: heartbreak in the rain, becoming rich, missing someone, football dreams, betrayal, summer love..."></textarea>
+      <label for="idea">Song idea / word</label>
+      <textarea id="idea" placeholder="Example: heartbreak in the rain, becoming rich, summer love, football dreams, betrayal, missing someone..."></textarea>
 
       <div class="row">
         <div>
@@ -404,6 +626,7 @@ footer a{
             <option value="rock">Emotional Rock</option>
             <option value="drill">UK Drill</option>
             <option value="dance">Dance / Club</option>
+            <option value="country">Country Pop</option>
           </select>
         </div>
 
@@ -423,17 +646,18 @@ footer a{
 
       <div class="row">
         <div>
-          <label for="hookStyle">Hook Style</label>
+          <label for="hookStyle">Hook style</label>
           <select id="hookStyle">
             <option value="chant">Chant Hook</option>
             <option value="repeat">Repeat Hook</option>
             <option value="question">Question Hook</option>
             <option value="cinematic">Cinematic Hook</option>
+            <option value="simple">Simple TikTok Hook</option>
           </select>
         </div>
 
         <div>
-          <label for="length">Song Length</label>
+          <label for="length">Length</label>
           <select id="length">
             <option value="short">Short Viral</option>
             <option value="medium" selected>Full Song</option>
@@ -442,29 +666,103 @@ footer a{
         </div>
       </div>
 
-      <label for="artistName">Artist Name Optional</label>
-      <input id="artistName" placeholder="Example: Cornelius Aurelius" />
+      <div class="slider-row">
+        <div class="slider-top">
+          <span>Hook Energy</span>
+          <strong id="energyValue">80</strong>
+        </div>
+        <input id="energy" type="range" min="1" max="100" value="80" oninput="energyValue.textContent=this.value">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-top">
+          <span>Repetition</span>
+          <strong id="repeatValue">65</strong>
+        </div>
+        <input id="repeatPower" type="range" min="1" max="100" value="65" oninput="repeatValue.textContent=this.value">
+      </div>
+
+      <label>Editable word bank</label>
+      <div class="word-bank" id="wordBank"></div>
+
+      <div class="add-word">
+        <input id="newWord" placeholder="Add/edit words..." />
+        <button class="secondary" onclick="addWord()">ADD</button>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="artistName">Artist optional</label>
+          <input id="artistName" placeholder="Cornelius Aurelius" />
+        </div>
+        <div>
+          <label for="cleanMode">Mode</label>
+          <select id="cleanMode">
+            <option value="clean">Clean Lyrics</option>
+            <option value="edgy">Edgy but Safe</option>
+          </select>
+        </div>
+      </div>
 
       <div class="buttons">
-        <button class="primary" onclick="generateSong()">CREATE UNIQUE SONG</button>
-        <button class="secondary" onclick="copyLyrics()">COPY LYRICS</button>
+        <button class="primary" onclick="generateSong(false)">CREATE UNIQUE SONG</button>
+        <button class="hotbtn" onclick="generateSong(true)">FRESH VERSION</button>
+        <button class="secondary" onclick="copyFullSong()">COPY ALL</button>
         <button class="darkbtn" onclick="downloadLyrics()">DOWNLOAD TXT</button>
-        <button class="darkbtn" onclick="clearSong()">CLEAR</button>
+        <button class="darkbtn" onclick="saveDraft()">SAVE DRAFT</button>
+        <button class="darkbtn" onclick="loadDraft()">LOAD DRAFT</button>
       </div>
 
       <p class="small-note">
-        This generator runs in the browser with original word-combinations and structures. It is designed for fresh lyric ideas, hooks, demos and songwriting inspiration.
+        Tip: Every lyric section is editable. Click any line and change the words. Use find/replace to quickly swap names, places, rhymes or emotions.
       </p>
     </aside>
 
     <section class="panel output">
-      <div class="output-top">
-        <h2 class="song-title" id="songTitle">Your Song Appears Here</h2>
-        <div class="pill" id="songMeta">Waiting for idea...</div>
+      <div class="topbar">
+        <h2 class="song-title" id="songTitle" contenteditable="true" spellcheck="false">Your Song Appears Here</h2>
+        <div class="meta">
+          <span class="pill" id="songMeta">Waiting for idea...</span>
+          <span class="pill pink" id="versionMeta">Version 0</span>
+          <span class="pill blue">Editable</span>
+        </div>
       </div>
 
-      <div class="lyrics-box" id="lyrics">
-        <span class="placeholder">Type a word or song idea, then press “CREATE UNIQUE SONG”.</span>
+      <div class="quick-tools">
+        <input id="findWord" placeholder="Find word..." />
+        <input id="replaceWord" placeholder="Replace with..." />
+        <button class="mini-button secondary" onclick="replaceWords()">REPLACE</button>
+      </div>
+
+      <div class="viral-strip">
+        <div class="mini-card">
+          <h3>15 Second Viral Hook</h3>
+          <div class="editable-box" id="viralHook" contenteditable="true" spellcheck="false">
+            <span class="placeholder">Generate a song to create a short hook.</span>
+          </div>
+          <br>
+          <button class="darkbtn mini-button" onclick="copyElementText('viralHook')">COPY HOOK</button>
+        </div>
+
+        <div class="mini-card">
+          <h3>Caption + Hashtags</h3>
+          <div class="editable-box" id="captionBox" contenteditable="true" spellcheck="false">
+            <span class="placeholder">Generate a song to create a caption.</span>
+          </div>
+          <br>
+          <button class="darkbtn mini-button" onclick="copyElementText('captionBox')">COPY CAPTION</button>
+        </div>
+      </div>
+
+      <div class="sections" id="sections">
+        <div class="section-card">
+          <div class="section-head">
+            <strong>START</strong>
+          </div>
+          <div class="section-text placeholder">
+            Type an idea, press CREATE UNIQUE SONG, then edit any words directly on the page.
+          </div>
+        </div>
       </div>
 
       <div class="stats">
@@ -480,6 +778,10 @@ footer a{
           <strong id="hookScore">0%</strong>
           Hook Energy
         </div>
+        <div class="stat">
+          <strong id="editScore">Ready</strong>
+          Edit Status
+        </div>
       </div>
     </section>
 
@@ -494,132 +796,228 @@ footer a{
 <div class="toast" id="toast">Copied!</div>
 
 <script>
-const words = {
-  emotional: ["midnight", "heartbeat", "memory", "rainfall", "silence", "echo", "empty room", "old photo", "last call", "streetlight"],
-  confident: ["spotlight", "gold", "crown", "pressure", "winner", "legacy", "high road", "big dream", "fast lane", "no fear"],
-  sad: ["goodbye", "cold bed", "broken plans", "grey sky", "lost time", "teardrops", "faded voice", "closed door", "winter", "alone"],
-  dark: ["shadows", "sirens", "black glass", "smoke", "danger", "ghost town", "red lights", "low moon", "bad omen", "cold world"],
-  romantic: ["slow dance", "soft skin", "late night", "your name", "warm hands", "moonlight", "kiss", "forever", "summer air", "close"],
-  motivational: ["comeback", "training", "hunger", "vision", "rise", "discipline", "fight", "dream", "focus", "tomorrow"],
-  chaotic: ["neon", "madness", "wild hearts", "fast money", "lost signal", "too loud", "no brakes", "flashback", "static", "runaway"]
-};
+let version = 0;
+let lastOptions = null;
+let currentSections = [];
 
-const endings = ["tonight", "again", "for life", "inside", "too late", "right now", "no more", "like fire", "in the dark", "when I fall"];
+const starterWords = [
+  "midnight", "rain", "heartbreak", "money", "dream", "spotlight",
+  "memory", "summer", "fire", "comeback", "your name", "city lights"
+];
+
+const moodWords = {
+  emotional:["heartbeat","memory","rainfall","silence","echo","empty room","old photo","last call","streetlight","almost"],
+  confident:["spotlight","gold","crown","pressure","winner","legacy","high road","big dream","fast lane","no fear"],
+  sad:["goodbye","cold bed","broken plans","grey sky","lost time","teardrops","faded voice","closed door","winter","alone"],
+  dark:["shadows","sirens","black glass","smoke","danger","ghost town","red lights","low moon","bad omen","cold world"],
+  romantic:["slow dance","soft skin","late night","your name","warm hands","moonlight","kiss","forever","summer air","close"],
+  motivational:["comeback","training","hunger","vision","rise","discipline","fight","dream","focus","tomorrow"],
+  chaotic:["neon","madness","wild hearts","fast money","lost signal","too loud","no brakes","flashback","static","runaway"]
+};
 
 const rhymeBanks = {
-  pop: ["sky", "fly", "high", "alive", "fire", "desire", "tonight", "light"],
-  rap: ["pain", "rain", "chain", "name", "game", "flame", "lane", "same"],
-  afro: ["body", "party", "calling", "falling", "slowly", "holy", "motion", "ocean"],
-  rnb: ["close", "ghost", "most", "dose", "slow", "know", "low", "home"],
-  rock: ["stone", "alone", "bone", "home", "wire", "fire", "higher", "liar"],
-  drill: ["road", "cold", "code", "mode", "zone", "phone", "known", "own"],
-  dance: ["move", "groove", "lose", "choose", "night", "light", "rise", "alive"]
+  pop:["sky","fly","high","alive","fire","desire","tonight","light"],
+  rap:["pain","rain","chain","name","game","flame","lane","same"],
+  afro:["body","party","calling","falling","slowly","holy","motion","ocean"],
+  rnb:["close","ghost","most","dose","slow","know","low","home"],
+  rock:["stone","alone","bone","home","wire","fire","higher","liar"],
+  drill:["road","cold","code","mode","zone","phone","known","own"],
+  dance:["move","groove","lose","choose","night","light","rise","alive"],
+  country:["truck","dust","love","us","road","home","gone","song"]
 };
 
-const openers = {
-  pop: [
+const genreOpeners = {
+  pop:[
     "I put my heart where the bright lights glow",
     "Everybody sees me but they don't know",
     "I turned the pain into something they can sing",
     "One little word became a whole new thing"
   ],
-  rap: [
+  rap:[
     "I came from the noise with a plan in my palm",
     "They watched from the side while I walked through the storm",
     "I counted every loss till the losses made sense",
     "I built up a name from the cracks in the fence"
   ],
-  afro: [
+  afro:[
     "Your name on my phone and the rhythm go low",
     "Sunset on the road where the warm breeze blow",
     "I feel that spark when the bassline move",
     "One step closer and the whole night smooth"
   ],
-  rnb: [
+  rnb:[
     "I hear your voice in the space by my bed",
     "Soft little memories run through my head",
     "I don't want perfect, I want something real",
     "Tell me the truth if you know how I feel"
   ],
-  rock: [
+  rock:[
     "I screamed at the sky till the sky screamed back",
     "I found my soul on a one-way track",
     "Every scar became a lighter in the rain",
     "I wear my truth like a beautiful pain"
   ],
-  drill: [
+  drill:[
     "Cold nights taught me how to move with sense",
     "I read the room before I jump that fence",
     "No fake love when the pressure gets close",
     "I keep my mind on the mission the most"
   ],
-  dance: [
+  dance:[
     "Lights go wild when the bassline drops",
     "No sleep now till the whole room pops",
     "Hands in the air like we're chasing the sun",
     "We don't go home till the feeling is done"
+  ],
+  country:[
+    "Dust on my boots and a song in the wind",
+    "I drove past the place where the story begins",
+    "Old radio talking like it knows my heart",
+    "Small town sky but the dreams got large"
   ]
 };
 
-function pick(arr){
-  return arr[Math.floor(Math.random() * arr.length)];
+const endings = ["tonight","again","for life","inside","too late","right now","no more","like fire","in the dark","when I fall"];
+
+function init(){
+  starterWords.forEach(w => renderChip(w));
+  document.getElementById("idea").addEventListener("input", suggestIdeaWords);
+}
+
+function suggestIdeaWords(){
+  const idea = cleanInput(document.getElementById("idea").value);
+  if(!idea) return;
+
+  const words = idea
+    .split(/[, ]+/)
+    .map(w => w.trim().toLowerCase())
+    .filter(w => w.length > 3)
+    .slice(0, 4);
+
+  words.forEach(w => {
+    if(!getWordBank().includes(w)) renderChip(w);
+  });
+}
+
+function renderChip(word){
+  const bank = document.getElementById("wordBank");
+  const chip = document.createElement("div");
+  chip.className = "chip";
+  chip.innerHTML = `<span contenteditable="true" spellcheck="false">${escapeHTML(word)}</span><button title="Remove">×</button>`;
+  chip.querySelector("button").onclick = () => chip.remove();
+  bank.appendChild(chip);
+}
+
+function addWord(){
+  const input = document.getElementById("newWord");
+  const word = cleanInput(input.value);
+  if(!word) return showToast("Type a word first");
+  renderChip(word);
+  input.value = "";
+  showToast("Word added");
+}
+
+function getWordBank(){
+  return [...document.querySelectorAll("#wordBank .chip span")]
+    .map(el => cleanInput(el.innerText.toLowerCase()))
+    .filter(Boolean);
 }
 
 function cleanInput(text){
-  return text
+  return String(text || "")
     .replace(/[<>]/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }
 
+function escapeHTML(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
+
+function pick(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function maybe(arr, fallback){
+  return arr.length ? pick(arr) : fallback;
+}
+
 function titleCase(str){
-  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  return cleanInput(str).replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
-function makeTitle(idea, mood){
-  const shortIdea = idea.split(" ").slice(0,4).join(" ");
-  const titleForms = [
-    `${titleCase(shortIdea)} Tonight`,
-    `No More ${titleCase(shortIdea)}`,
-    `${titleCase(shortIdea)} In My Head`,
-    `The ${titleCase(mood)} Song`,
-    `${titleCase(shortIdea)} Again`,
-    `When ${titleCase(shortIdea)} Calls`
+function shuffle(arr){
+  return [...arr].sort(() => Math.random() - .5);
+}
+
+function getOptions(){
+  const idea = cleanInput(document.getElementById("idea").value) || maybe(getWordBank(), "my dream");
+  const genre = document.getElementById("genre").value;
+  const mood = document.getElementById("mood").value;
+  const hookStyle = document.getElementById("hookStyle").value;
+  const length = document.getElementById("length").value;
+  const artist = cleanInput(document.getElementById("artistName").value);
+  const cleanMode = document.getElementById("cleanMode").value;
+  const energy = Number(document.getElementById("energy").value);
+  const repeatPower = Number(document.getElementById("repeatPower").value);
+
+  const words = [
+    ...getWordBank(),
+    ...idea.split(/[, ]+/).filter(w => w.length > 2),
+    ...(moodWords[mood] || [])
+  ].map(w => cleanInput(w)).filter(Boolean);
+
+  return {idea, genre, mood, hookStyle, length, artist, cleanMode, energy, repeatPower, words};
+}
+
+function makeTitle(opts){
+  const key = titleCase(opts.idea.split(" ").slice(0,4).join(" "));
+  const forms = [
+    `${key} Tonight`,
+    `No More ${key}`,
+    `${key} In My Head`,
+    `When ${key} Calls`,
+    `${key} Again`,
+    `The ${titleCase(opts.mood)} Song`,
+    `Before The ${key} Fades`
   ];
-  return pick(titleForms);
+  return pick(forms);
 }
 
-function makeHook(idea, genre, mood, hookStyle){
-  const key = idea || pick(words[mood]);
-  const r = rhymeBanks[genre];
-  const image = pick(words[mood]);
-  const end = pick(endings);
+function makeLine(opts, ending){
+  const w1 = maybe(opts.words, "dream");
+  const w2 = maybe(opts.words, "night");
+  const r = maybe(rhymeBanks[opts.genre], "light");
 
-  if(hookStyle === "chant"){
-    return `[HOOK]\n${titleCase(key)}, ${titleCase(key)}, say it loud ${end}\nWe don't back down when the lights go ${pick(r)}\n${titleCase(key)}, ${titleCase(key)}, running through my veins\nTurn it up once, let the whole world feel my ${pick(r)}`;
-  }
+  const templates = [
+    `I found ${w1} hiding where the ${ending || r} lives`,
+    `You said ${w2} softly, now the whole room shifts`,
+    `I turned the hard part into something bright`,
+    `Now every little scar starts singing at night`,
+    `I keep one secret underneath my tongue`,
+    `The old me faded when the new beat begun`,
+    `I chase that feeling till the streetlights bend`,
+    `I lose the fear, then I find myself again`
+  ];
 
-  if(hookStyle === "repeat"){
-    return `[HOOK]\nI keep thinking 'bout ${key}, thinking 'bout ${key}\nCan't let go, can't let go, not ${end}\nI keep singing 'bout ${key}, singing 'bout ${key}\nIf it hurts this good, let it burn like ${pick(r)}`;
-  }
-
-  if(hookStyle === "question"){
-    return `[HOOK]\nWhy does ${key} feel louder at night?\nWhy do I run when I'm close to the light?\nWhy does my heart still remember your name?\nWhy does the fire still dance in the ${pick(r)}?`;
-  }
-
-  return `[HOOK]\nIf ${key} was a movie, I'd rewind the scene\nYou in the smoke and me chasing the dream\nAll of the stars started spelling your name\nNow every silence is singing the same`;
+  return pick(templates);
 }
 
-function makeVerse(idea, genre, mood, number){
-  const r = rhymeBanks[genre];
-  const w1 = pick(words[mood]);
-  const w2 = pick(words[mood]);
-  const w3 = pick(words[mood]);
-  const opener = pick(openers[genre]);
+function makeVerse(opts, number){
+  const r = rhymeBanks[opts.genre];
+  const opener = pick(genreOpeners[opts.genre]);
+  const w1 = maybe(opts.words, "midnight");
+  const w2 = maybe(opts.words, "memory");
+  const w3 = maybe(opts.words, "fire");
 
-  return `[VERSE ${number}]
-${opener}
-I kept ${idea} hidden where nobody goes
+  return {
+    name:`VERSE ${number}`,
+    text:
+`${opener}
+I kept ${opts.idea} hidden where nobody goes
 Found a little truth in the ${w1}
 Lost a little sleep but I learned how to grow
 Now the whole room shakes when I step in the ${pick(r)}
@@ -629,117 +1027,292 @@ Every wrong turn put a spark in my soul
 If they ask why I changed, tell them life got strange
 And I made a new sound from the ${w2}
 
-${w3} on my jacket, hope in my chest
+${titleCase(w3)} on my jacket, hope in my chest
 I gave the bad days somewhere to rest
 Now every line that I write feels alive
-Like a secret getting ready to ${pick(r)}`;
+Like a secret getting ready to ${pick(r)}`
+  };
 }
 
-function makePreChorus(idea, mood){
-  return `[PRE-CHORUS]
-Maybe I was breaking, maybe I was becoming
+function makePreChorus(opts){
+  return {
+    name:"PRE-CHORUS",
+    text:
+`Maybe I was breaking, maybe I was becoming
 Maybe all the silence was the sound of me running
-I took one word, ${idea}, and I made it my sign
-Now the whole night moves when the feeling hits right`;
+I took one word, ${opts.idea}, and I made it my sign
+Now the whole night moves when the feeling hits right`
+  };
 }
 
-function makeBridge(idea, genre, mood){
-  const r = rhymeBanks[genre];
-  return `[BRIDGE]
-If I disappear, remember the sound
+function makeHook(opts){
+  const key = opts.idea;
+  const r = rhymeBanks[opts.genre];
+  const w = maybe(opts.words, "fire");
+  const end = pick(endings);
+  const repeat = opts.repeatPower > 70;
+
+  let text = "";
+
+  if(opts.hookStyle === "chant"){
+    text =
+`${titleCase(key)}, ${titleCase(key)}, say it loud ${end}
+We don't back down when the lights go ${pick(r)}
+${titleCase(key)}, ${titleCase(key)}, running through my veins
+Turn it up once, let the whole world feel my ${pick(r)}`;
+  }
+
+  if(opts.hookStyle === "repeat"){
+    text =
+`I keep thinking 'bout ${key}, thinking 'bout ${key}
+Can't let go, can't let go, not ${end}
+I keep singing 'bout ${key}, singing 'bout ${key}
+If it hurts this good, let it burn like ${pick(r)}`;
+  }
+
+  if(opts.hookStyle === "question"){
+    text =
+`Why does ${key} feel louder at night?
+Why do I run when I'm close to the light?
+Why does my heart still remember your name?
+Why does the fire still dance in the ${pick(r)}?`;
+  }
+
+  if(opts.hookStyle === "cinematic"){
+    text =
+`If ${key} was a movie, I'd rewind the scene
+You in the smoke and me chasing the dream
+All of the stars started spelling your name
+Now every silence is singing the same`;
+  }
+
+  if(opts.hookStyle === "simple"){
+    text =
+`${titleCase(key)}, I can't let it go
+One more night and I lose control
+Say it once, now everybody knows
+${titleCase(key)}, I can't let it go`;
+  }
+
+  if(repeat){
+    text += `\n${titleCase(key)}, ${titleCase(key)}, ${titleCase(key)}\nI feel it in my ${w}, I feel it in my soul`;
+  }
+
+  return {name:"CHORUS / HOOK", text};
+}
+
+function makeBridge(opts){
+  const r = rhymeBanks[opts.genre];
+  return {
+    name:"BRIDGE",
+    text:
+`If I disappear, remember the sound
 I was never lost, I was under the ground
 Planting my name where the dark things grow
-Turning ${idea} into something you know
+Turning ${opts.idea} into something you know
 
 And if the world gets heavy, I won't fold
 I got new dreams wrapped in old gold
 One more breath, one more try
-One more reason to touch the ${pick(r)}`;
+One more reason to touch the ${pick(r)}`
+  };
 }
 
-function makeOutro(idea, mood){
-  return `[OUTRO]
-So let it play when the night gets quiet
+function makeOutro(opts){
+  return {
+    name:"OUTRO",
+    text:
+`So let it play when the night gets quiet
 Let it rise when the heart gets tired
 I was just a spark, now I'm setting it free
-${titleCase(idea)} became the song in me`;
+${titleCase(opts.idea)} became the song in me`
+  };
 }
 
-function generateSong(){
-  const rawIdea = document.getElementById("idea").value;
-  const idea = cleanInput(rawIdea) || pick(["my dream", "your name", "the comeback", "one last chance", "midnight love"]);
-  const genre = document.getElementById("genre").value;
-  const mood = document.getElementById("mood").value;
-  const hookStyle = document.getElementById("hookStyle").value;
-  const length = document.getElementById("length").value;
+function makeViralHook(opts){
+  const key = titleCase(opts.idea);
+  const w = maybe(opts.words, "midnight");
+
+  const hooks = [
+    `${key}, ${key}, I can't let it go\nSay it once and the whole room knows\n${key}, ${key}, running through my soul\nOne more night and I lose control`,
+    `POV: you hear "${opts.idea}" and remember everything.\n${key} in my head.\n${key} in my chest.\nI was fine till the beat confessed.`,
+    `This is the part everybody sings:\n${key}, don't leave me low\nI still feel you when the lights go cold\n${key}, don't let me go`,
+    `One word: ${key}\nOne night: too late\nOne heart: still awake\nOne song: replay, replay`
+  ];
+
+  return pick(hooks);
+}
+
+function makeCaption(opts){
+  const tags = shuffle([
+    "#songwriter", "#newmusic", "#viralhook", "#lyrics", "#musicideas",
+    "#unsignedartist", "#songwriting", "#hookchallenge", "#fyp", "#originalsong"
+  ]).slice(0,6).join(" ");
+
+  const captions = [
+    `I typed "${opts.idea}" and this hook came out. Would you finish the song?`,
+    `This sounds like the chorus before the heartbreak scene.`,
+    `POV: one word turns into a full song idea.`,
+    `This hook needs a beat immediately.`,
+    `Original lyric idea. Change one word and make it yours.`
+  ];
+
+  return `${pick(captions)}\n\n${tags}`;
+}
+
+function buildSong(opts){
+  const sections = [];
+
+  sections.push(makeVerse(opts, 1));
+  sections.push(makePreChorus(opts));
+  sections.push(makeHook(opts));
+
+  if(opts.length === "medium" || opts.length === "long"){
+    sections.push(makeVerse(opts, 2));
+    sections.push(makeHook(opts));
+    sections.push(makeBridge(opts));
+    sections.push(makeHook(opts));
+    sections.push(makeOutro(opts));
+  }
+
+  if(opts.length === "long"){
+    sections.splice(5, 0, makeVerse(opts, 3), makePreChorus(opts));
+  }
+
+  if(opts.length === "short"){
+    sections.push(makeOutro(opts));
+  }
+
+  return sections;
+}
+
+function generateSong(forceFresh){
+  const opts = getOptions();
+  lastOptions = opts;
+  version++;
+
+  const title = makeTitle(opts);
+  currentSections = buildSong(opts);
+
+  document.getElementById("songTitle").innerText = title;
+  document.getElementById("songMeta").innerText = `${titleCase(opts.genre)} • ${titleCase(opts.mood)} • ${opts.length}`;
+  document.getElementById("versionMeta").innerText = `Version ${version}`;
+  document.getElementById("viralHook").innerText = makeViralHook(opts);
+  document.getElementById("captionBox").innerText = makeCaption(opts);
+
+  renderSections();
+  updateStats();
+  showToast(forceFresh ? "Fresh version created" : "Song created");
+}
+
+function renderSections(){
+  const box = document.getElementById("sections");
+  box.innerHTML = "";
+
+  currentSections.forEach((section, index) => {
+    const card = document.createElement("div");
+    card.className = "section-card";
+    card.innerHTML = `
+      <div class="section-head">
+        <strong>${escapeHTML(section.name)}</strong>
+        <div class="section-actions">
+          <button class="secondary" onclick="copySection(${index})">COPY</button>
+          <button class="darkbtn" onclick="regenerateSection(${index})">REWRITE</button>
+          <button class="darkbtn" onclick="makePunchier(${index})">PUNCHIER</button>
+        </div>
+      </div>
+      <div class="section-text" contenteditable="true" spellcheck="false" oninput="syncSection(${index}, this.innerText)">${escapeHTML(section.text)}</div>
+    `;
+    box.appendChild(card);
+  });
+}
+
+function syncSection(index, text){
+  if(currentSections[index]){
+    currentSections[index].text = text;
+    document.getElementById("editScore").innerText = "Edited";
+    updateStats();
+  }
+}
+
+function regenerateSection(index){
+  if(!lastOptions) return showToast("Create a song first");
+
+  const oldName = currentSections[index].name;
+  let fresh;
+
+  if(oldName.includes("VERSE")) fresh = makeVerse(lastOptions, oldName.includes("2") ? 2 : oldName.includes("3") ? 3 : 1);
+  else if(oldName.includes("PRE")) fresh = makePreChorus(lastOptions);
+  else if(oldName.includes("HOOK") || oldName.includes("CHORUS")) fresh = makeHook(lastOptions);
+  else if(oldName.includes("BRIDGE")) fresh = makeBridge(lastOptions);
+  else fresh = makeOutro(lastOptions);
+
+  currentSections[index] = fresh;
+  renderSections();
+  updateStats();
+  showToast(`${oldName} rewritten`);
+}
+
+function makePunchier(index){
+  if(!currentSections[index]) return;
+
+  const lines = currentSections[index].text.split("\n").filter(Boolean);
+  const punchWords = ["again", "right now", "too loud", "no fear", "all night", "say it", "one more time", "can't stop"];
+
+  const punched = lines.map((line, i) => {
+    if(i % 3 === 0 && line.length < 70){
+      return line + " — " + pick(punchWords);
+    }
+    if(i % 4 === 0){
+      return line.replace(/\.$/, "") + "!";
+    }
+    return line;
+  }).join("\n");
+
+  currentSections[index].text = punched;
+  renderSections();
+  updateStats();
+  showToast("Made punchier");
+}
+
+function copySection(index){
+  if(!currentSections[index]) return;
+  copyText(`[${currentSections[index].name}]\n${currentSections[index].text}`, "Section copied");
+}
+
+function getFullSongText(){
+  const title = cleanInput(document.getElementById("songTitle").innerText) || "Untitled Song";
   const artist = cleanInput(document.getElementById("artistName").value);
 
-  const title = makeTitle(idea, mood);
+  let text = title.toUpperCase() + "\n";
+  if(artist) text += `By ${artist}\n`;
+  text += "\n";
 
-  let song = "";
-  song += `${title.toUpperCase()}\n`;
-  if(artist) song += `By ${artist}\n`;
-  song += `Genre: ${titleCase(genre)} | Mood: ${titleCase(mood)}\n\n`;
+  currentSections.forEach(section => {
+    text += `[${section.name}]\n${section.text.trim()}\n\n`;
+  });
 
-  const hook = makeHook(idea, genre, mood, hookStyle);
+  text += `15 SECOND HOOK:\n${document.getElementById("viralHook").innerText.trim()}\n\n`;
+  text += `CAPTION:\n${document.getElementById("captionBox").innerText.trim()}\n`;
 
-  if(length === "short"){
-    song += makeVerse(idea, genre, mood, 1) + "\n\n";
-    song += makePreChorus(idea, mood) + "\n\n";
-    song += hook + "\n\n";
-    song += makeOutro(idea, mood);
-  }
-
-  if(length === "medium"){
-    song += makeVerse(idea, genre, mood, 1) + "\n\n";
-    song += makePreChorus(idea, mood) + "\n\n";
-    song += hook + "\n\n";
-    song += makeVerse(idea, genre, mood, 2) + "\n\n";
-    song += hook + "\n\n";
-    song += makeBridge(idea, genre, mood) + "\n\n";
-    song += hook + "\n\n";
-    song += makeOutro(idea, mood);
-  }
-
-  if(length === "long"){
-    song += makeVerse(idea, genre, mood, 1) + "\n\n";
-    song += makePreChorus(idea, mood) + "\n\n";
-    song += hook + "\n\n";
-    song += makeVerse(idea, genre, mood, 2) + "\n\n";
-    song += makePreChorus(idea, mood) + "\n\n";
-    song += hook + "\n\n";
-    song += makeVerse(idea, genre, mood, 3) + "\n\n";
-    song += makeBridge(idea, genre, mood) + "\n\n";
-    song += hook + "\n\n";
-    song += hook + "\n\n";
-    song += makeOutro(idea, mood);
-  }
-
-  document.getElementById("songTitle").textContent = title;
-  document.getElementById("songMeta").textContent = `${titleCase(genre)} • ${titleCase(mood)} • Fresh Generated`;
-  document.getElementById("lyrics").textContent = song;
-
-  updateStats(song);
+  return text.trim();
 }
 
-function updateStats(song){
-  const words = song.trim().split(/\s+/).filter(Boolean).length;
-  const sections = (song.match(/\[/g) || []).length;
-  const hookMentions = (song.match(/hook/gi) || []).length;
-  const score = Math.min(100, 55 + hookMentions * 12 + Math.floor(Math.random() * 18));
-
-  document.getElementById("wordCount").textContent = words;
-  document.getElementById("sectionCount").textContent = sections;
-  document.getElementById("hookScore").textContent = score + "%";
+function copyFullSong(){
+  if(!currentSections.length) return showToast("Create a song first");
+  copyText(getFullSongText(), "Full song copied");
 }
 
-async function copyLyrics(){
-  const text = document.getElementById("lyrics").innerText;
-  if(!text || text.includes("Type a word")) return showToast("Create a song first");
+function copyElementText(id){
+  const text = document.getElementById(id).innerText.trim();
+  if(!text) return showToast("Nothing to copy");
+  copyText(text, "Copied");
+}
 
+async function copyText(text, message){
   try{
     await navigator.clipboard.writeText(text);
-    showToast("Lyrics copied");
+    showToast(message);
   }catch(e){
     const area = document.createElement("textarea");
     area.value = text;
@@ -747,16 +1320,43 @@ async function copyLyrics(){
     area.select();
     document.execCommand("copy");
     area.remove();
-    showToast("Lyrics copied");
+    showToast(message);
   }
 }
 
-function downloadLyrics(){
-  const text = document.getElementById("lyrics").innerText;
-  if(!text || text.includes("Type a word")) return showToast("Create a song first");
+function replaceWords(){
+  const find = cleanInput(document.getElementById("findWord").value);
+  const replace = cleanInput(document.getElementById("replaceWord").value);
 
-  const title = document.getElementById("songTitle").textContent || "lyrics";
-  const blob = new Blob([text], { type:"text/plain" });
+  if(!find) return showToast("Type a word to find");
+
+  const re = new RegExp(find.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+
+  currentSections = currentSections.map(section => ({
+    ...section,
+    text: section.text.replace(re, replace)
+  }));
+
+  document.getElementById("songTitle").innerText =
+    document.getElementById("songTitle").innerText.replace(re, replace);
+
+  document.getElementById("viralHook").innerText =
+    document.getElementById("viralHook").innerText.replace(re, replace);
+
+  document.getElementById("captionBox").innerText =
+    document.getElementById("captionBox").innerText.replace(re, replace);
+
+  renderSections();
+  updateStats();
+  showToast("Words replaced");
+}
+
+function downloadLyrics(){
+  if(!currentSections.length) return showToast("Create a song first");
+
+  const text = getFullSongText();
+  const title = cleanInput(document.getElementById("songTitle").innerText) || "lyrics";
+  const blob = new Blob([text], {type:"text/plain"});
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
@@ -770,32 +1370,83 @@ function downloadLyrics(){
   showToast("TXT downloaded");
 }
 
-function clearSong(){
-  document.getElementById("idea").value = "";
-  document.getElementById("artistName").value = "";
-  document.getElementById("songTitle").textContent = "Your Song Appears Here";
-  document.getElementById("songMeta").textContent = "Waiting for idea...";
-  document.getElementById("lyrics").innerHTML = '<span class="placeholder">Type a word or song idea, then press “CREATE UNIQUE SONG”.</span>';
-  document.getElementById("wordCount").textContent = "0";
-  document.getElementById("sectionCount").textContent = "0";
-  document.getElementById("hookScore").textContent = "0%";
+function saveDraft(){
+  const draft = {
+    title: document.getElementById("songTitle").innerText,
+    sections: currentSections,
+    viralHook: document.getElementById("viralHook").innerText,
+    caption: document.getElementById("captionBox").innerText,
+    idea: document.getElementById("idea").value,
+    genre: document.getElementById("genre").value,
+    mood: document.getElementById("mood").value,
+    hookStyle: document.getElementById("hookStyle").value,
+    length: document.getElementById("length").value,
+    words: getWordBank()
+  };
+
+  localStorage.setItem("viralLyricsDraft", JSON.stringify(draft));
+  showToast("Draft saved");
+}
+
+function loadDraft(){
+  const raw = localStorage.getItem("viralLyricsDraft");
+  if(!raw) return showToast("No saved draft");
+
+  const draft = JSON.parse(raw);
+
+  document.getElementById("songTitle").innerText = draft.title || "Loaded Song";
+  document.getElementById("viralHook").innerText = draft.viralHook || "";
+  document.getElementById("captionBox").innerText = draft.caption || "";
+  document.getElementById("idea").value = draft.idea || "";
+  document.getElementById("genre").value = draft.genre || "pop";
+  document.getElementById("mood").value = draft.mood || "emotional";
+  document.getElementById("hookStyle").value = draft.hookStyle || "chant";
+  document.getElementById("length").value = draft.length || "medium";
+
+  document.getElementById("wordBank").innerHTML = "";
+  (draft.words || starterWords).forEach(w => renderChip(w));
+
+  currentSections = draft.sections || [];
+  lastOptions = getOptions();
+
+  renderSections();
+  updateStats();
+  showToast("Draft loaded");
+}
+
+function updateStats(){
+  const text = getFullSongText();
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+  const sections = currentSections.length;
+  const hookText = document.getElementById("viralHook").innerText + " " + text;
+  const repeats = countRepeatedWords(hookText);
+  const energy = lastOptions ? lastOptions.energy : 0;
+  const hookScore = Math.min(100, Math.round((energy * .55) + (repeats * 4) + (sections * 3)));
+
+  document.getElementById("wordCount").innerText = currentSections.length ? words : 0;
+  document.getElementById("sectionCount").innerText = sections;
+  document.getElementById("hookScore").innerText = currentSections.length ? hookScore + "%" : "0%";
+}
+
+function countRepeatedWords(text){
+  const words = text.toLowerCase().match(/\b[a-z]{4,}\b/g) || [];
+  const map = {};
+  words.forEach(w => map[w] = (map[w] || 0) + 1);
+  return Object.values(map).filter(n => n > 1).length;
 }
 
 function showToast(message){
   const toast = document.getElementById("toast");
-  toast.textContent = message;
+  toast.innerText = message;
   toast.classList.add("show");
-
-  setTimeout(() => {
-    toast.classList.remove("show");
-  }, 1700);
+  setTimeout(() => toast.classList.remove("show"), 1700);
 }
 
-document.getElementById("idea").addEventListener("keydown", function(e){
-  if(e.key === "Enter" && e.ctrlKey){
-    generateSong();
-  }
+document.addEventListener("keydown", e => {
+  if(e.ctrlKey && e.key === "Enter") generateSong(true);
 });
+
+init();
 </script>
 
 </body>
