@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Viral Lyrics Generator — Cornelius Aurelius</title>
+
+<style>
+:root{
+  --bg:#050509;
+  --card:#11111c;
+  --card2:#18182a;
+  --text:#f7f7ff;
+  --muted:#b9b9d6;
+  --pink:#ff2fb3;
+  --blue:#27e8ff;
+  --yellow:#fff36d;
+  --green:#6dffb8;
+  --danger:#ff5c7a;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  font-family:Inter, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255,47,179,.22), transparent 35%),
+    radial-gradient(circle at top right, rgba(39,232,255,.18), transparent 30%),
+    linear-gradient(180deg,#050509,#090914 45%,#020207);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom, black, transparent 90%);
+}
+
+.wrapper{
+  width:min(1120px,94%);
+  margin:auto;
+  padding:32px 0;
+}
+
+.hero{
+  text-align:center;
+  padding:34px 12px 24px;
+}
+
+.badge{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding:8px 14px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:999px;
+  color:var(--yellow);
+  background:rgba(255,255,255,.06);
+  box-shadow:0 0 28px rgba(255,47,179,.18);
+  font-size:.9rem;
+  margin-bottom:18px;
+}
+
+h1{
+  font-size:clamp(2.3rem,7vw,5.8rem);
+  line-height:.92;
+  letter-spacing:-.07em;
+  text-transform:uppercase;
+  background:linear-gradient(90deg,#fff,var(--blue),var(--pink),var(--yellow));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:0 0 30px rgba(255,47,179,.18);
+}
+
+.subtitle{
+  max-width:760px;
+  margin:18px auto 0;
+  color:var(--muted);
+  font-size:clamp(1rem,2.3vw,1.18rem);
+  line-height:1.55;
+}
+
+.app{
+  display:grid;
+  grid-template-columns:420px 1fr;
+  gap:22px;
+  align-items:start;
+  margin-top:26px;
+}
+
+.panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:30px;
+  box-shadow:0 24px 90px rgba(0,0,0,.42);
+  backdrop-filter:blur(14px);
+}
+
+.controls{
+  padding:22px;
+  position:sticky;
+  top:18px;
+}
+
+label{
+  display:block;
+  font-size:.84rem;
+  color:#eeeeff;
+  margin:15px 0 8px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+textarea,
+select,
+input{
+  width:100%;
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(0,0,0,.35);
+  color:white;
+  border-radius:18px;
+  padding:14px 15px;
+  font-size:1rem;
+  outline:none;
+}
+
+textarea{
+  min-height:118px;
+  resize:vertical;
+  line-height:1.45;
+}
+
+textarea:focus,
+select:focus,
+input:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(39,232,255,.12);
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:20px;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+  border-radius:18px;
+  padding:14px 16px;
+  color:#050509;
+  font-weight:900;
+  font-size:.96rem;
+  transition:.18s ease;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.08);
+}
+
+.primary{
+  grid-column:span 2;
+  background:linear-gradient(90deg,var(--yellow),var(--pink),var(--blue));
+  color:#050509;
+  box-shadow:0 0 30px rgba(255,47,179,.25);
+}
+
+.secondary{
+  background:#fff;
+}
+
+.darkbtn{
+  background:#222238;
+  color:white;
+  border:1px solid rgba(255,255,255,.12);
+}
+
+.small-note{
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.45;
+  margin-top:16px;
+}
+
+.output{
+  padding:22px;
+  min-height:650px;
+}
+
+.output-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.song-title{
+  font-size:clamp(1.6rem,4vw,3rem);
+  letter-spacing:-.04em;
+  line-height:1;
+}
+
+.pill{
+  white-space:nowrap;
+  font-size:.8rem;
+  color:var(--green);
+  border:1px solid rgba(109,255,184,.24);
+  background:rgba(109,255,184,.08);
+  padding:8px 12px;
+  border-radius:999px;
+}
+
+.lyrics-box{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025)),
+    rgba(0,0,0,.28);
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:26px;
+  padding:24px;
+  min-height:500px;
+  white-space:pre-wrap;
+  line-height:1.72;
+  color:#fbfbff;
+  font-size:1.02rem;
+}
+
+.placeholder{
+  color:#8787a8;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:14px;
+}
+
+.stat{
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.045);
+  border-radius:18px;
+  padding:12px;
+  color:var(--muted);
+  font-size:.82rem;
+}
+
+.stat strong{
+  display:block;
+  color:white;
+  font-size:1.05rem;
+  margin-bottom:4px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%) translateY(30px);
+  opacity:0;
+  background:#fff;
+  color:#050509;
+  padding:13px 18px;
+  border-radius:999px;
+  font-weight:900;
+  box-shadow:0 18px 45px rgba(0,0,0,.35);
+  transition:.25s ease;
+  z-index:50;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+footer{
+  text-align:center;
+  margin:28px 0 4px;
+  color:var(--muted);
+}
+
+footer a{
+  color:white;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.35);
+}
+
+.floating-word{
+  position:fixed;
+  pointer-events:none;
+  font-weight:900;
+  text-transform:uppercase;
+  opacity:.08;
+  animation:float 12s linear infinite;
+}
+
+@keyframes float{
+  from{ transform:translateY(110vh) rotate(-8deg); }
+  to{ transform:translateY(-20vh) rotate(8deg); }
+}
+
+@media(max-width:900px){
+  .app{
+    grid-template-columns:1fr;
+  }
+
+  .controls{
+    position:relative;
+    top:auto;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .output-top{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
+
+@media(max-width:520px){
+  .wrapper{
+    width:min(96%,100%);
+    padding:18px 0;
+  }
+
+  .hero{
+    padding-top:20px;
+  }
+
+  .panel{
+    border-radius:24px;
+  }
+
+  .row,
+  .buttons{
+    grid-template-columns:1fr;
+  }
+
+  .primary{
+    grid-column:span 1;
+  }
+
+  .lyrics-box{
+    padding:18px;
+    font-size:.98rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="floating-word" style="left:4%; animation-delay:0s; font-size:4rem;">HOOK</div>
+<div class="floating-word" style="left:72%; animation-delay:3s; font-size:3rem;">VIRAL</div>
+<div class="floating-word" style="left:35%; animation-delay:6s; font-size:5rem;">LYRICS</div>
+
+<main class="wrapper">
+
+  <section class="hero">
+    <div class="badge">⚡ Unique Song Idea Generator</div>
+    <h1>Viral Lyrics Generator</h1>
+    <p class="subtitle">
+      Type one word, a feeling, a story, or what the song is about. The site creates a fresh song structure with a hook, verses, chorus, bridge and outro — ready to copy.
+    </p>
+  </section>
+
+  <section class="app">
+
+    <aside class="panel controls">
+      <label for="idea">What is the song about?</label>
+      <textarea id="idea" placeholder="Example: heartbreak in the rain, becoming rich, missing someone, football dreams, betrayal, summer love..."></textarea>
+
+      <div class="row">
+        <div>
+          <label for="genre">Genre</label>
+          <select id="genre">
+            <option value="pop">Viral Pop</option>
+            <option value="rap">Rap / Trap</option>
+            <option value="afro">Afrobeats</option>
+            <option value="rnb">R&B</option>
+            <option value="rock">Emotional Rock</option>
+            <option value="drill">UK Drill</option>
+            <option value="dance">Dance / Club</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="mood">Mood</label>
+          <select id="mood">
+            <option value="emotional">Emotional</option>
+            <option value="confident">Confident</option>
+            <option value="sad">Sad</option>
+            <option value="dark">Dark</option>
+            <option value="romantic">Romantic</option>
+            <option value="motivational">Motivational</option>
+            <option value="chaotic">Chaotic</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="hookStyle">Hook Style</label>
+          <select id="hookStyle">
+            <option value="chant">Chant Hook</option>
+            <option value="repeat">Repeat Hook</option>
+            <option value="question">Question Hook</option>
+            <option value="cinematic">Cinematic Hook</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="length">Song Length</label>
+          <select id="length">
+            <option value="short">Short Viral</option>
+            <option value="medium" selected>Full Song</option>
+            <option value="long">Extended</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="artistName">Artist Name Optional</label>
+      <input id="artistName" placeholder="Example: Cornelius Aurelius" />
+
+      <div class="buttons">
+        <button class="primary" onclick="generateSong()">CREATE UNIQUE SONG</button>
+        <button class="secondary" onclick="copyLyrics()">COPY LYRICS</button>
+        <button class="darkbtn" onclick="downloadLyrics()">DOWNLOAD TXT</button>
+        <button class="darkbtn" onclick="clearSong()">CLEAR</button>
+      </div>
+
+      <p class="small-note">
+        This generator runs in the browser with original word-combinations and structures. It is designed for fresh lyric ideas, hooks, demos and songwriting inspiration.
+      </p>
+    </aside>
+
+    <section class="panel output">
+      <div class="output-top">
+        <h2 class="song-title" id="songTitle">Your Song Appears Here</h2>
+        <div class="pill" id="songMeta">Waiting for idea...</div>
+      </div>
+
+      <div class="lyrics-box" id="lyrics">
+        <span class="placeholder">Type a word or song idea, then press “CREATE UNIQUE SONG”.</span>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <strong id="wordCount">0</strong>
+          Words
+        </div>
+        <div class="stat">
+          <strong id="sectionCount">0</strong>
+          Sections
+        </div>
+        <div class="stat">
+          <strong id="hookScore">0%</strong>
+          Hook Energy
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+  <footer>
+    <a href="https://corneliusaurelius.com" target="_blank">corneliusaurelius.com</a>
+  </footer>
+
+</main>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script>
+const words = {
+  emotional: ["midnight", "heartbeat", "memory", "rainfall", "silence", "echo", "empty room", "old photo", "last call", "streetlight"],
+  confident: ["spotlight", "gold", "crown", "pressure", "winner", "legacy", "high road", "big dream", "fast lane", "no fear"],
+  sad: ["goodbye", "cold bed", "broken plans", "grey sky", "lost time", "teardrops", "faded voice", "closed door", "winter", "alone"],
+  dark: ["shadows", "sirens", "black glass", "smoke", "danger", "ghost town", "red lights", "low moon", "bad omen", "cold world"],
+  romantic: ["slow dance", "soft skin", "late night", "your name", "warm hands", "moonlight", "kiss", "forever", "summer air", "close"],
+  motivational: ["comeback", "training", "hunger", "vision", "rise", "discipline", "fight", "dream", "focus", "tomorrow"],
+  chaotic: ["neon", "madness", "wild hearts", "fast money", "lost signal", "too loud", "no brakes", "flashback", "static", "runaway"]
+};
+
+const endings = ["tonight", "again", "for life", "inside", "too late", "right now", "no more", "like fire", "in the dark", "when I fall"];
+
+const rhymeBanks = {
+  pop: ["sky", "fly", "high", "alive", "fire", "desire", "tonight", "light"],
+  rap: ["pain", "rain", "chain", "name", "game", "flame", "lane", "same"],
+  afro: ["body", "party", "calling", "falling", "slowly", "holy", "motion", "ocean"],
+  rnb: ["close", "ghost", "most", "dose", "slow", "know", "low", "home"],
+  rock: ["stone", "alone", "bone", "home", "wire", "fire", "higher", "liar"],
+  drill: ["road", "cold", "code", "mode", "zone", "phone", "known", "own"],
+  dance: ["move", "groove", "lose", "choose", "night", "light", "rise", "alive"]
+};
+
+const openers = {
+  pop: [
+    "I put my heart where the bright lights glow",
+    "Everybody sees me but they don't know",
+    "I turned the pain into something they can sing",
+    "One little word became a whole new thing"
+  ],
+  rap: [
+    "I came from the noise with a plan in my palm",
+    "They watched from the side while I walked through the storm",
+    "I counted every loss till the losses made sense",
+    "I built up a name from the cracks in the fence"
+  ],
+  afro: [
+    "Your name on my phone and the rhythm go low",
+    "Sunset on the road where the warm breeze blow",
+    "I feel that spark when the bassline move",
+    "One step closer and the whole night smooth"
+  ],
+  rnb: [
+    "I hear your voice in the space by my bed",
+    "Soft little memories run through my head",
+    "I don't want perfect, I want something real",
+    "Tell me the truth if you know how I feel"
+  ],
+  rock: [
+    "I screamed at the sky till the sky screamed back",
+    "I found my soul on a one-way track",
+    "Every scar became a lighter in the rain",
+    "I wear my truth like a beautiful pain"
+  ],
+  drill: [
+    "Cold nights taught me how to move with sense",
+    "I read the room before I jump that fence",
+    "No fake love when the pressure gets close",
+    "I keep my mind on the mission the most"
+  ],
+  dance: [
+    "Lights go wild when the bassline drops",
+    "No sleep now till the whole room pops",
+    "Hands in the air like we're chasing the sun",
+    "We don't go home till the feeling is done"
+  ]
+};
+
+function pick(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function cleanInput(text){
+  return text
+    .replace(/[<>]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function titleCase(str){
+  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+}
+
+function makeTitle(idea, mood){
+  const shortIdea = idea.split(" ").slice(0,4).join(" ");
+  const titleForms = [
+    `${titleCase(shortIdea)} Tonight`,
+    `No More ${titleCase(shortIdea)}`,
+    `${titleCase(shortIdea)} In My Head`,
+    `The ${titleCase(mood)} Song`,
+    `${titleCase(shortIdea)} Again`,
+    `When ${titleCase(shortIdea)} Calls`
+  ];
+  return pick(titleForms);
+}
+
+function makeHook(idea, genre, mood, hookStyle){
+  const key = idea || pick(words[mood]);
+  const r = rhymeBanks[genre];
+  const image = pick(words[mood]);
+  const end = pick(endings);
+
+  if(hookStyle === "chant"){
+    return `[HOOK]\n${titleCase(key)}, ${titleCase(key)}, say it loud ${end}\nWe don't back down when the lights go ${pick(r)}\n${titleCase(key)}, ${titleCase(key)}, running through my veins\nTurn it up once, let the whole world feel my ${pick(r)}`;
+  }
+
+  if(hookStyle === "repeat"){
+    return `[HOOK]\nI keep thinking 'bout ${key}, thinking 'bout ${key}\nCan't let go, can't let go, not ${end}\nI keep singing 'bout ${key}, singing 'bout ${key}\nIf it hurts this good, let it burn like ${pick(r)}`;
+  }
+
+  if(hookStyle === "question"){
+    return `[HOOK]\nWhy does ${key} feel louder at night?\nWhy do I run when I'm close to the light?\nWhy does my heart still remember your name?\nWhy does the fire still dance in the ${pick(r)}?`;
+  }
+
+  return `[HOOK]\nIf ${key} was a movie, I'd rewind the scene\nYou in the smoke and me chasing the dream\nAll of the stars started spelling your name\nNow every silence is singing the same`;
+}
+
+function makeVerse(idea, genre, mood, number){
+  const r = rhymeBanks[genre];
+  const w1 = pick(words[mood]);
+  const w2 = pick(words[mood]);
+  const w3 = pick(words[mood]);
+  const opener = pick(openers[genre]);
+
+  return `[VERSE ${number}]
+${opener}
+I kept ${idea} hidden where nobody goes
+Found a little truth in the ${w1}
+Lost a little sleep but I learned how to grow
+Now the whole room shakes when I step in the ${pick(r)}
+
+I don't need a map, I can feel that road
+Every wrong turn put a spark in my soul
+If they ask why I changed, tell them life got strange
+And I made a new sound from the ${w2}
+
+${w3} on my jacket, hope in my chest
+I gave the bad days somewhere to rest
+Now every line that I write feels alive
+Like a secret getting ready to ${pick(r)}`;
+}
+
+function makePreChorus(idea, mood){
+  return `[PRE-CHORUS]
+Maybe I was breaking, maybe I was becoming
+Maybe all the silence was the sound of me running
+I took one word, ${idea}, and I made it my sign
+Now the whole night moves when the feeling hits right`;
+}
+
+function makeBridge(idea, genre, mood){
+  const r = rhymeBanks[genre];
+  return `[BRIDGE]
+If I disappear, remember the sound
+I was never lost, I was under the ground
+Planting my name where the dark things grow
+Turning ${idea} into something you know
+
+And if the world gets heavy, I won't fold
+I got new dreams wrapped in old gold
+One more breath, one more try
+One more reason to touch the ${pick(r)}`;
+}
+
+function makeOutro(idea, mood){
+  return `[OUTRO]
+So let it play when the night gets quiet
+Let it rise when the heart gets tired
+I was just a spark, now I'm setting it free
+${titleCase(idea)} became the song in me`;
+}
+
+function generateSong(){
+  const rawIdea = document.getElementById("idea").value;
+  const idea = cleanInput(rawIdea) || pick(["my dream", "your name", "the comeback", "one last chance", "midnight love"]);
+  const genre = document.getElementById("genre").value;
+  const mood = document.getElementById("mood").value;
+  const hookStyle = document.getElementById("hookStyle").value;
+  const length = document.getElementById("length").value;
+  const artist = cleanInput(document.getElementById("artistName").value);
+
+  const title = makeTitle(idea, mood);
+
+  let song = "";
+  song += `${title.toUpperCase()}\n`;
+  if(artist) song += `By ${artist}\n`;
+  song += `Genre: ${titleCase(genre)} | Mood: ${titleCase(mood)}\n\n`;
+
+  const hook = makeHook(idea, genre, mood, hookStyle);
+
+  if(length === "short"){
+    song += makeVerse(idea, genre, mood, 1) + "\n\n";
+    song += makePreChorus(idea, mood) + "\n\n";
+    song += hook + "\n\n";
+    song += makeOutro(idea, mood);
+  }
+
+  if(length === "medium"){
+    song += makeVerse(idea, genre, mood, 1) + "\n\n";
+    song += makePreChorus(idea, mood) + "\n\n";
+    song += hook + "\n\n";
+    song += makeVerse(idea, genre, mood, 2) + "\n\n";
+    song += hook + "\n\n";
+    song += makeBridge(idea, genre, mood) + "\n\n";
+    song += hook + "\n\n";
+    song += makeOutro(idea, mood);
+  }
+
+  if(length === "long"){
+    song += makeVerse(idea, genre, mood, 1) + "\n\n";
+    song += makePreChorus(idea, mood) + "\n\n";
+    song += hook + "\n\n";
+    song += makeVerse(idea, genre, mood, 2) + "\n\n";
+    song += makePreChorus(idea, mood) + "\n\n";
+    song += hook + "\n\n";
+    song += makeVerse(idea, genre, mood, 3) + "\n\n";
+    song += makeBridge(idea, genre, mood) + "\n\n";
+    song += hook + "\n\n";
+    song += hook + "\n\n";
+    song += makeOutro(idea, mood);
+  }
+
+  document.getElementById("songTitle").textContent = title;
+  document.getElementById("songMeta").textContent = `${titleCase(genre)} • ${titleCase(mood)} • Fresh Generated`;
+  document.getElementById("lyrics").textContent = song;
+
+  updateStats(song);
+}
+
+function updateStats(song){
+  const words = song.trim().split(/\s+/).filter(Boolean).length;
+  const sections = (song.match(/\[/g) || []).length;
+  const hookMentions = (song.match(/hook/gi) || []).length;
+  const score = Math.min(100, 55 + hookMentions * 12 + Math.floor(Math.random() * 18));
+
+  document.getElementById("wordCount").textContent = words;
+  document.getElementById("sectionCount").textContent = sections;
+  document.getElementById("hookScore").textContent = score + "%";
+}
+
+async function copyLyrics(){
+  const text = document.getElementById("lyrics").innerText;
+  if(!text || text.includes("Type a word")) return showToast("Create a song first");
+
+  try{
+    await navigator.clipboard.writeText(text);
+    showToast("Lyrics copied");
+  }catch(e){
+    const area = document.createElement("textarea");
+    area.value = text;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+    showToast("Lyrics copied");
+  }
+}
+
+function downloadLyrics(){
+  const text = document.getElementById("lyrics").innerText;
+  if(!text || text.includes("Type a word")) return showToast("Create a song first");
+
+  const title = document.getElementById("songTitle").textContent || "lyrics";
+  const blob = new Blob([text], { type:"text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = title.toLowerCase().replace(/[^a-z0-9]+/g, "-") + ".txt";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+  showToast("TXT downloaded");
+}
+
+function clearSong(){
+  document.getElementById("idea").value = "";
+  document.getElementById("artistName").value = "";
+  document.getElementById("songTitle").textContent = "Your Song Appears Here";
+  document.getElementById("songMeta").textContent = "Waiting for idea...";
+  document.getElementById("lyrics").innerHTML = '<span class="placeholder">Type a word or song idea, then press “CREATE UNIQUE SONG”.</span>';
+  document.getElementById("wordCount").textContent = "0";
+  document.getElementById("sectionCount").textContent = "0";
+  document.getElementById("hookScore").textContent = "0%";
+}
+
+function showToast(message){
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1700);
+}
+
+document.getElementById("idea").addEventListener("keydown", function(e){
+  if(e.key === "Enter" && e.ctrlKey){
+    generateSong();
+  }
+});
+</script>
+
+</body>
+</html>
