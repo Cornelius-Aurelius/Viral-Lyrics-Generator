@@ -764,9 +764,9 @@ footer,footer a{color:#526279}
       </div>
 
       <div class="buttons">
-        <button class="primary" onclick="generateSong(false)">CREATE UNIQUE SONG</button>
-        <button class="hotbtn" onclick="generateSong(true)">FRESH VERSION</button>
-        <button class="secondary" onclick="copyFullSong()">COPY ALL</button>
+        <button class="primary" onclick="generateSong(false)">CREATE NEW SONG</button>
+        <button class="hotbtn" onclick="generateSong(true)">DIFFERENT SONG</button>
+        <button class="secondary" onclick="copyFullSong()">COPY COMPLETE LYRICS</button>
         <button class="darkbtn" onclick="downloadLyrics()">DOWNLOAD TXT</button>
         <button class="darkbtn" onclick="saveDraft()">SAVE DRAFT</button>
         <button class="darkbtn" onclick="loadDraft()">LOAD DRAFT</button>
@@ -824,7 +824,7 @@ footer,footer a{color:#526279}
         </div>
       </div>
 
-      <div class="stats">
+      <p class="help-note" id="originalityNote" role="status" aria-live="polite">Fresh songs are compared with recent drafts on this device. Worldwide originality and exclusivity cannot be guaranteed.</p><div class="stats">
         <div class="stat">
           <strong id="wordCount">0</strong>
           Words
@@ -1526,5 +1526,145 @@ document.addEventListener("keydown", e => {
 init();
 </script>
 
+
+<script>
+/* Original-writing variation layer; browser-local duplicate defence. */
+(function(){
+const key="viralLyricsHistoryV3";
+const rnd=n=>{if(n<2)return 0; if(window.crypto&&crypto.getRandomValues){let v=new Uint32Array(1);crypto.getRandomValues(v);return v[0]%n;}return Math.floor(Math.random()*n)};
+const pickOne=a=>a[rnd(a.length)];
+const choose=a=>{let b=a.slice();for(let i=b.length-1;i>0;i--){let j=rnd(i+1);[b[i],b[j]]=[b[j],b[i]]}return b};
+const normalize=s=>String(s||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim();
+const themes=[
+["the spare key","the last train","forgiveness","I learned to leave the door unlocked"],
+["the chipped cup","the kitchen at dawn","ordinary love","I found the extraordinary in the small"],
+["a folded letter","the empty platform","missing you","I can miss you without losing myself"],
+["an old photograph","the road back home","second chances","I quit rehearsing the past"],
+["the cracked mirror","a room full of strangers","belonging","I started to recognise my own reflection"],
+["a worn-out ticket","the harbour in winter","courage","I walked ahead before the fear went away"],
+["a silent telephone","the motorway at night","regret","I stopped waiting for the perfect words"],
+["a paper ring","the porch after rain","promises","I kept my promise in a different way"],
+["an untied shoe","the starting line","hope","I began before I felt ready"],
+["a dust-covered trophy","a hotel room","the price of success","I learned what winning couldn't buy"],
+["a blue scarf","the supermarket aisle","grief","I made room for laughter beside the loss"],
+["a handwritten map","the bridge at sunset","change","I found another road inside the ending"]
+];
+const openers=[
+"The room was full of people but I heard the clock alone",
+"Your handwriting leaned against a word I couldn't say",
+"The last light in the window caught me halfway out the door",
+"The little things were louder than the thunder in the street",
+"I put my hand against the glass and watched the day turn gold",
+"The morning came without a map or promises to keep",
+"The quiet on the staircase felt like someone holding on",
+"The words I couldn't manage found a home inside the rain",
+"A stranger held the door and somehow changed the whole day",
+"I missed the final bus and saw a city I'd ignored"
+];
+const reflections=[
+"I thought a perfect ending could repair a broken start",
+"I used to count the reasons but I never counted love",
+"I thought the brave were fearless till I saw how courage shook",
+"The days I tried to hurry were the days I wish I'd kept",
+"I wanted all the answers when I needed just one truth",
+"The world kept moving gently while I stood there counting scars",
+"I called it being careful when I really meant afraid",
+"I tried to hold the seasons in a photograph of us",
+"I learned that being certain isn't always being strong",
+"I thought the road was ending when the road was turning round"
+];
+const resolves=[
+"There's room for something beautiful beyond the things I know",
+"The heart can tell a story that the clock will never keep",
+"I'll take another step before I know where it will lead",
+"I can hold a memory without carrying the weight",
+"The light that found the doorway wasn't asking me to stay",
+"Some things are only finished when we let them change our lives",
+"I don't need all the answers just a reason to begin",
+"I can love the life I had and still make room for more",
+"The smallest act of kindness gave the ordinary wings",
+"Today is not a promise but it's something I can hold"
+];
+const chorusA=[
+"I can learn to live with the light coming in",
+"Leave a little room for the life I haven't lived",
+"Tell me where the ordinary miracles go",
+"I'm still here when the final lights go down",
+"Don't mistake the silence for the end of the song",
+"There's a different kind of brave in letting go",
+"Every little ending has a door I haven't seen",
+"I was more than all the things I couldn't save",
+"Let the morning find us where we are",
+"The world is wide enough for one more try",
+"I can carry love and leave the weight",
+"Give me something honest I can sing"
+];
+const chorusB=[
+"I won't spend forever trying to change yesterday",
+"And the part of me that's healing has a voice",
+"Let the people that I love know why I stayed",
+"Now the smallest things are shining in the dark",
+"We can make another meaning out of this",
+"I will stand beside the person I've become",
+"Every step can be a promise without words",
+"There is beauty in the things we couldn't plan",
+"Even if the road is longer than I thought",
+"I'm still learning how to call this place my home"
+];
+function readHistory(){try{let h=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(h)?h:[]}catch{return []}}
+function similarity(a,b){let x=new Set(normalize(a).split(" ").filter(w=>w.length>3)),y=new Set(normalize(b).split(" ").filter(w=>w.length>3));let n=0;x.forEach(w=>{if(y.has(w))n++});return n/Math.max(1,x.size+y.size-n)}
+function compose(opts){
+ const [object,place,truth,change]=pickOne(themes),[opening,opening2]=choose(openers).slice(0,2);
+ const [thought,thought2]=choose(reflections).slice(0,2),[resolution,resolution2]=choose(resolves).slice(0,2);
+ const [hook,hook2]=choose(chorusA).slice(0,2),[reply,reply2]=choose(chorusB).slice(0,2);
+ const idea=opts.idea&&opts.idea!=="my dream"?opts.idea.slice(0,72):truth;
+ const titleCandidates=["Somewhere After","The Way Forward","One More Morning","A Different Kind","Little Miracles","The Unwritten Part","Rooms For More","The Other Road","Everything We Kept","A Better Beginning","Before The Light","What We Carry","The Next Good Day","Just Enough Courage","After Yesterday","Another Meaning"];
+ const title=pickOne(titleCandidates);
+ const chorus=[hook,reply,hook2,hook].join("\n");
+ const sections=[
+ {name:"VERSE 1",text:[opening,"I held "+object+" beside "+place+".","I thought about "+idea+" and all it couldn't solve.",thought,opening2].join("\n")},
+ {name:"PRE-CHORUS",text:["I kept a thousand questions folded underneath my coat,","Then something in the quiet gave the smallest one a voice.",resolution].join("\n")},
+ {name:"CHORUS",text:chorus},
+ {name:"VERSE 2",text:[thought2,"I put "+object+" where I could see it in the morning.","The world outside "+place+" kept turning without me.",resolution2,"I finally understood what I was frightened to become."].join("\n")},
+ {name:"PRE-CHORUS 2",text:["It wasn't all for nothing, even when it felt that way,","The bravest thing was choosing not to live inside that day.",reply2].join("\n")},
+ {name:"CHORUS 2",text:chorus},
+ {name:"BRIDGE",text:["Here's the truth I hadn't found the strength to say:","It wasn't only "+truth+" that brought me here.","It was the person I became along the way.",change+".","Now I can watch the evening disappear."].join("\n")},
+ {name:"FINAL CHORUS",text:[hook,reply2,"This time I know exactly what those words can mean.",hook2,hook].join("\n")},
+ {name:"OUTRO",text:["I left "+object+" beside "+place+".",resolution2].join("\n")}
+ ];
+ if(opts.length==="short")return {title,hook,sections:[sections[0],sections[2],sections[6],sections[7]]};
+ if(opts.length==="long")sections.splice(6,0,{name:"VERSE 3",text:["The next day came and didn't ask what happened yesterday.",opening2,change+".",resolution].join("\n")});
+ return {title,hook,sections};
+}
+window.generateSong=function(fresh){
+ const opts=getOptions(),hist=readHistory();
+ let candidate,novel=false;
+ for(let tries=0;tries<80;tries++){
+  candidate=compose(opts);
+  const lyrics=candidate.sections.map(s=>s.text).join(" ");
+  if(!hist.some(h=>h.hook===candidate.hook||h.title===candidate.title&&similarity(h.lyrics,lyrics)>.42||similarity(h.lyrics,lyrics)>.68)){novel=true;break}
+ }
+ lastOptions=opts;version++;
+ currentSections=candidate.sections;
+ document.getElementById("songTitle").innerText=candidate.title;
+ document.getElementById("songMeta").innerText=titleCase(opts.genre)+" • "+titleCase(opts.mood)+" • "+opts.length;
+ document.getElementById("versionMeta").innerText="Version "+version;
+ document.getElementById("viralHook").innerText=candidate.hook;
+ document.getElementById("captionBox").innerText="A song about "+opts.idea+". Which line stays with you? #Songwriting #NewMusic";
+ document.getElementById("editScore").innerText="New draft";
+ renderSections();updateStats();
+ try{hist.push({title:candidate.title,hook:candidate.hook,lyrics:candidate.sections.map(s=>s.text).join(" ")});localStorage.setItem(key,JSON.stringify(hist.slice(-150)))}catch(e){}
+ document.getElementById("originalityNote").textContent=novel?"New storyline and hook checked against recent drafts on this device. Worldwide uniqueness is not guaranteed.":"A new draft was created, but some overlap may remain. Please review before releasing.";
+ showToast("New song created");
+};
+window.copyFullSong=function(){
+ if(!currentSections.length)return showToast("Create a song first");
+ const title=cleanInput(document.getElementById("songTitle").innerText)||"Untitled Song";
+ const artist=cleanInput(document.getElementById("artistName").value);
+ const lyrics=title+(artist?"\nBy "+artist:"")+"\n\n"+currentSections.map(s=>"["+s.name+"]\n"+s.text.trim()).join("\n\n");
+ copyText(lyrics,"Complete lyrics copied");
+};
+})();
+</script>
 </body>
 </html>
