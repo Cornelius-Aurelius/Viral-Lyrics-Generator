@@ -3,7 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Viral Lyrics Generator — Cornelius Aurelius</title>
+<title>Free Song Lyrics Generator | Viral Lyrics Generator by Cornelius Aurelius</title>
+<meta name="description" content="Create original editable song lyrics, catchy chorus ideas and short hooks for pop, rap, R&B, Afrobeats, rock and more. Free browser-based songwriting tool by Cornelius Aurelius.">
+<meta name="author" content="Cornelius Aurelius">
+<meta name="creator" content="Cornelius Aurelius">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#f6f7fb">
+<link rel="canonical" href="https://cornelius-aurelius.github.io/Viral-Lyrics-Generator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Viral Lyrics Generator — Cornelius Aurelius">
+<meta property="og:description" content="Write, edit, save and export original song lyrics and hooks in your browser.">
+<meta property="og:url" content="https://cornelius-aurelius.github.io/Viral-Lyrics-Generator/">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Viral Lyrics Generator","url":"https://cornelius-aurelius.github.io/Viral-Lyrics-Generator/","description":"A free browser-based editable songwriting and hook drafting tool.","applicationCategory":"MusicApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"creator":{"@type":"Person","name":"Cornelius Aurelius","url":"https://corneliusaurelius.com"}}</script>
 
 <style>
 :root{
@@ -589,10 +601,57 @@ footer a{
     font-size:.98rem;
   }
 }
+
+/* Accessible editorial redesign: comfortable contrast and familiar controls */
+:root{--bg:#f6f7fb;--panel:#fff;--panel2:#f0f3f8;--text:#182438;--muted:#526279;--soft:#263751;--pink:#315caa;--blue:#315caa;--yellow:#254a87;--green:#245740;--orange:#a15424;--red:#b53d4b;--line:#d9e1eb;--shadow:0 12px 35px rgba(26,42,70,.08)}
+html{scroll-padding-top:20px}
+body{background:#f6f7fb;color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+body::before,.float-word{display:none}
+.wrapper{width:min(1180px,94%);padding-top:18px}
+.hero{padding:18px 8px 12px;text-align:left}
+.badge{background:#e8eef9;color:#24477d;border:1px solid #cbd9ec;box-shadow:none;margin-bottom:14px}
+h1{font-size:clamp(2.15rem,5vw,3.8rem);line-height:1.08;letter-spacing:-.05em;background:none;color:#162640;text-transform:none}
+.subtitle{margin:12px 0 0;color:#526279;max-width:780px}
+.app{margin-top:20px;grid-template-columns:minmax(300px,370px) minmax(0,1fr);gap:20px}
+.panel{background:#fff;border:1px solid #dce3ed;box-shadow:var(--shadow);backdrop-filter:none;border-radius:20px}
+.controls,.output{padding:22px}
+label{color:#34445c;letter-spacing:0;font-size:.86rem;font-weight:700;text-transform:none}
+textarea,select,input{background:#fff;color:#182438;border:1px solid #bdcadc;border-radius:10px;font-family:inherit}
+textarea:focus,select:focus,input:focus{border-color:#315caa;box-shadow:0 0 0 3px rgba(49,92,170,.16)}
+select option{background:#fff;color:#182438}
+.slider-row,.word-bank{background:#f7f9fc;border:1px solid #e1e7f0;border-radius:12px}
+input[type="range"]{accent-color:#315caa}
+.chip{background:#eaf0f9;color:#213c67;border:1px solid #d4dfed}
+.chip button{background:#d5e1f2;color:#243c60}
+button{border-radius:10px;font-weight:750;transition:background-color .15s,transform .15s}
+button:hover{filter:none}
+button:focus-visible,a:focus-visible,[contenteditable="true"]:focus-visible{outline:3px solid #3669ba;outline-offset:3px}
+.primary,.hotbtn{background:#315caa;color:#fff;box-shadow:none}
+.hotbtn{background:#dbe7f8;color:#24477d}
+.secondary{background:#e9f0fa;color:#254c85}
+.darkbtn{background:#f2f5f9;color:#273952;border:1px solid #d5deea}
+.song-title{color:#1a2e4d;line-height:1.15}
+.pill,.pill.pink,.pill.blue{color:#36537b;border-color:#dbe4f1;background:#eff4fb}
+.quick-tools,.mini-card,.section-card,.stat{background:#f9fbfd;border:1px solid #e0e7ef;border-radius:14px}
+.section-head{background:#f0f4fa;border-bottom:1px solid #dde6f1}
+.section-head strong,.mini-card h3,.stat strong{color:#263c5c}
+.section-text,.editable-box{color:#24354e}
+.section-text:focus{background:#fff;box-shadow:inset 0 0 0 2px #b6cbed}
+.placeholder,.stat,.small-note{color:#63728a}
+footer,footer a{color:#526279}
+.toast{background:#183a6d;color:#fff;border-radius:10px}
+.help-note{font-size:.85rem;line-height:1.45;color:#53647d;margin:10px 0 0}
+.skip-link{position:absolute;left:-9999px;top:8px;background:#fff;color:#162640;padding:10px;z-index:99}
+.skip-link:focus{left:8px}
+.status-note{margin:8px 0 0;font-size:.85rem;color:#526279}
+@media(max-width:980px){.app{grid-template-columns:1fr}.controls{position:static}}
+@media(max-width:650px){.wrapper{width:min(100% - 24px,1180px)}.controls,.output{padding:16px}.hero{text-align:left}.row,.buttons,.quick-tools,.stats{grid-template-columns:1fr}.section-actions{width:100%}.section-actions button{flex:1}.section-head{align-items:stretch}.song-title{font-size:1.8rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 </head>
 
 <body>
+<a class="skip-link" href="#idea">Skip to songwriting controls</a>
 
 <div class="float-word" style="left:4%; animation-delay:0s; font-size:4rem;">HOOK</div>
 <div class="float-word" style="left:74%; animation-delay:2s; font-size:3.5rem;">VIRAL</div>
@@ -602,10 +661,10 @@ footer a{
 <main class="wrapper">
 
   <section class="hero">
-    <div class="badge">⚡ Editable Song Generator</div>
+    <div class="badge">Free Songwriting Studio</div>
     <h1>Viral Lyrics Generator</h1>
     <p class="subtitle">
-      Type a word, feeling, story or song idea. Generate a fresh song, edit any lyric, replace words, regenerate sections, copy hooks, download drafts and build a stronger chorus.
+      Enter a song idea, choose a genre and create editable lyrics in seconds. Refine a chorus, build a short-form hook, then copy or save your draft. No account required.
     </p>
   </section>
 
@@ -682,11 +741,11 @@ footer a{
         <input id="repeatPower" type="range" min="1" max="100" value="65" oninput="repeatValue.textContent=this.value">
       </div>
 
-      <label>Editable word bank</label>
-      <div class="word-bank" id="wordBank"></div>
+      <label id="wordBankLabel">Editable word bank</label>
+      <div class="word-bank" id="wordBank" role="group" aria-labelledby="wordBankLabel"></div>
 
       <div class="add-word">
-        <input id="newWord" placeholder="Add/edit words..." />
+        <input id="newWord" aria-label="Add a word to the word bank" placeholder="Add a word..." />
         <button class="secondary" onclick="addWord()">ADD</button>
       </div>
 
@@ -714,13 +773,13 @@ footer a{
       </div>
 
       <p class="small-note">
-        Tip: Every lyric section is editable. Click any line and change the words. Use find/replace to quickly swap names, places, rhymes or emotions.
+        Tip: Edit any lyric directly, then save a browser draft or download a text file. This generator works offline after loading and uses built-in writing patterns, not a connected AI model.
       </p>
     </aside>
 
-    <section class="panel output">
+    <section class="panel output" aria-label="Generated song editor">
       <div class="topbar">
-        <h2 class="song-title" id="songTitle" contenteditable="true" spellcheck="false">Your Song Appears Here</h2>
+        <h2 class="song-title" id="songTitle" contenteditable="true" role="textbox" aria-label="Song title" spellcheck="false">Your Song Appears Here</h2>
         <div class="meta">
           <span class="pill" id="songMeta">Waiting for idea...</span>
           <span class="pill pink" id="versionMeta">Version 0</span>
@@ -729,15 +788,15 @@ footer a{
       </div>
 
       <div class="quick-tools">
-        <input id="findWord" placeholder="Find word..." />
-        <input id="replaceWord" placeholder="Replace with..." />
+        <input id="findWord" aria-label="Find word in lyrics" placeholder="Find word..." />
+        <input id="replaceWord" aria-label="Replacement word" placeholder="Replace with..." />
         <button class="mini-button secondary" onclick="replaceWords()">REPLACE</button>
       </div>
 
       <div class="viral-strip">
         <div class="mini-card">
           <h3>15 Second Viral Hook</h3>
-          <div class="editable-box" id="viralHook" contenteditable="true" spellcheck="false">
+          <div class="editable-box" id="viralHook" contenteditable="true" role="textbox" aria-label="Editable short hook" spellcheck="false">
             <span class="placeholder">Generate a song to create a short hook.</span>
           </div>
           <br>
@@ -746,7 +805,7 @@ footer a{
 
         <div class="mini-card">
           <h3>Caption + Hashtags</h3>
-          <div class="editable-box" id="captionBox" contenteditable="true" spellcheck="false">
+          <div class="editable-box" id="captionBox" contenteditable="true" role="textbox" aria-label="Editable caption" spellcheck="false">
             <span class="placeholder">Generate a song to create a caption.</span>
           </div>
           <br>
@@ -776,7 +835,7 @@ footer a{
         </div>
         <div class="stat">
           <strong id="hookScore">0%</strong>
-          Hook Energy
+          Hook energy estimate
         </div>
         <div class="stat">
           <strong id="editScore">Ready</strong>
@@ -788,17 +847,18 @@ footer a{
   </section>
 
   <footer>
-    <a href="https://corneliusaurelius.com" target="_blank">corneliusaurelius.com</a>
+    Created by <a href="https://corneliusaurelius.com" target="_blank" rel="noopener noreferrer">Cornelius Aurelius</a> · Original songwriting drafts, editable in your browser.
   </footer>
 
 </main>
 
-<div class="toast" id="toast">Copied!</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied!</div>
 
 <script>
 let version = 0;
 let lastOptions = null;
 let currentSections = [];
+const STORAGE_KEY = "viralLyricsDraft";
 
 const starterWords = [
   "midnight", "rain", "heartbreak", "money", "dream", "spotlight",
@@ -882,6 +942,7 @@ const endings = ["tonight","again","for life","inside","too late","right now","n
 function init(){
   starterWords.forEach(w => renderChip(w));
   document.getElementById("idea").addEventListener("input", suggestIdeaWords);
+  document.getElementById("newWord").addEventListener("keydown", e => {if(e.key === "Enter"){e.preventDefault();addWord();}});
 }
 
 function suggestIdeaWords(){
@@ -903,15 +964,16 @@ function renderChip(word){
   const bank = document.getElementById("wordBank");
   const chip = document.createElement("div");
   chip.className = "chip";
-  chip.innerHTML = `<span contenteditable="true" spellcheck="false">${escapeHTML(word)}</span><button title="Remove">×</button>`;
+  chip.innerHTML = `<span contenteditable="true" role="textbox" aria-label="Edit word" spellcheck="false">${escapeHTML(word)}</span><button type="button" aria-label="Remove ${escapeHTML(word)}" title="Remove word">×</button>`;
   chip.querySelector("button").onclick = () => chip.remove();
   bank.appendChild(chip);
 }
 
 function addWord(){
   const input = document.getElementById("newWord");
-  const word = cleanInput(input.value);
+  const word = cleanInput(input.value).slice(0,60);
   if(!word) return showToast("Type a word first");
+  if(getWordBank().includes(word.toLowerCase())) return showToast("Word already added");
   renderChip(word);
   input.value = "";
   showToast("Word added");
@@ -1190,6 +1252,7 @@ function generateSong(forceFresh){
   const opts = getOptions();
   lastOptions = opts;
   version++;
+  document.getElementById("editScore").innerText = "New draft";
 
   const title = makeTitle(opts);
   currentSections = buildSong(opts);
@@ -1221,7 +1284,7 @@ function renderSections(){
           <button class="darkbtn" onclick="makePunchier(${index})">PUNCHIER</button>
         </div>
       </div>
-      <div class="section-text" contenteditable="true" spellcheck="false" oninput="syncSection(${index}, this.innerText)">${escapeHTML(section.text)}</div>
+      <div class="section-text" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Edit ${escapeHTML(section.name)}" spellcheck="false" oninput="syncSection(${index}, this.innerText)">${escapeHTML(section.text)}</div>
     `;
     box.appendChild(card);
   });
@@ -1318,9 +1381,9 @@ async function copyText(text, message){
     area.value = text;
     document.body.appendChild(area);
     area.select();
-    document.execCommand("copy");
+    const copied = document.execCommand("copy");
     area.remove();
-    showToast(message);
+    showToast(copied ? message : "Copy not supported — select text manually");
   }
 }
 
@@ -1366,7 +1429,7 @@ function downloadLyrics(){
   a.click();
   a.remove();
 
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
   showToast("TXT downloaded");
 }
 
@@ -1384,15 +1447,19 @@ function saveDraft(){
     words: getWordBank()
   };
 
-  localStorage.setItem("viralLyricsDraft", JSON.stringify(draft));
-  showToast("Draft saved");
+  draft.artist = document.getElementById("artistName").value;
+  draft.cleanMode = document.getElementById("cleanMode").value;
+  draft.energy = document.getElementById("energy").value;
+  draft.repeatPower = document.getElementById("repeatPower").value;
+  draft.version = version;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(draft)); showToast("Draft saved in this browser"); }
+  catch(e) { showToast("Browser storage unavailable — download your draft"); }
 }
 
 function loadDraft(){
-  const raw = localStorage.getItem("viralLyricsDraft");
-  if(!raw) return showToast("No saved draft");
-
-  const draft = JSON.parse(raw);
+  let draft;
+  try { const raw=localStorage.getItem(STORAGE_KEY); if(!raw) return showToast("No saved draft"); draft=JSON.parse(raw); if(!draft || !Array.isArray(draft.sections)) throw Error("Invalid draft"); }
+  catch(e) { return showToast("Saved draft unavailable or invalid"); }
 
   document.getElementById("songTitle").innerText = draft.title || "Loaded Song";
   document.getElementById("viralHook").innerText = draft.viralHook || "";
@@ -1402,12 +1469,22 @@ function loadDraft(){
   document.getElementById("mood").value = draft.mood || "emotional";
   document.getElementById("hookStyle").value = draft.hookStyle || "chant";
   document.getElementById("length").value = draft.length || "medium";
+  document.getElementById("artistName").value = draft.artist || "";
+  document.getElementById("cleanMode").value = draft.cleanMode || "clean";
+  document.getElementById("energy").value = draft.energy || 80;
+  document.getElementById("repeatPower").value = draft.repeatPower || 65;
+  document.getElementById("energyValue").textContent = document.getElementById("energy").value;
+  document.getElementById("repeatValue").textContent = document.getElementById("repeatPower").value;
+  version = Number(draft.version) || version;
+  document.getElementById("versionMeta").innerText = `Version ${version}`;
 
   document.getElementById("wordBank").innerHTML = "";
   (draft.words || starterWords).forEach(w => renderChip(w));
 
-  currentSections = draft.sections || [];
+  currentSections = draft.sections.filter(x => x && typeof x.name === "string" && typeof x.text === "string").slice(0,30);
   lastOptions = getOptions();
+  document.getElementById("songMeta").innerText = `${titleCase(lastOptions.genre)} • ${titleCase(lastOptions.mood)} • ${lastOptions.length}`;
+  document.getElementById("editScore").innerText = "Loaded";
 
   renderSections();
   updateStats();
@@ -1415,7 +1492,7 @@ function loadDraft(){
 }
 
 function updateStats(){
-  const text = getFullSongText();
+  const text = currentSections.map(x => x.text).join(" ");
   const words = text.trim().split(/\s+/).filter(Boolean).length;
   const sections = currentSections.length;
   const hookText = document.getElementById("viralHook").innerText + " " + text;
